@@ -1,0 +1,30 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "cnel-ficha",
+          "appId": "1:424575586399:android:7e9f75293ae1129cfccbea",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "cnel-ficha",
+          "configurations": {
+            "android": "1:424575586399:android:7e9f75293ae1129cfccbea",
+            "web": "1:424575586399:web:71d185349a98c78cfccbea"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

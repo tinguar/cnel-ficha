@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "424575586399",
+    "project_id": "cnel-ficha",
+    "storage_bucket": "cnel-ficha.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424575586399:android:7e9f75293ae1129cfccbea",
+        "android_client_info": {
+          "package_name": "com.tinguardevtechnology.cnel_ficha"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABzrPI9iFyPN_pDrU3-1lW4Eqz1Tl1sQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
