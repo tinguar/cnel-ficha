@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
+import '../util/util.dart';
+
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({super.key, required this.handleSearch});
   final Function(NotificationResponse) handleSearch;
@@ -69,10 +71,9 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         Flexible(
           flex: 1,
           child: Container(
-            decoration: BoxDecoration(
-                color: ColorStyle.backgroundBlack,
-                border: Border.all(),
-                borderRadius: BorderRadius.circular(5)),
+            decoration:  DecorationStyle.greyBorder(
+              color: ColorStyle.backgroundBlack
+            ),
             height: 45,
             child: InkWell(
                 onTap: _search,

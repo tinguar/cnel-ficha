@@ -2,6 +2,8 @@ import 'package:cnel_ficha/model/planification.dart';
 import 'package:cnel_ficha/search_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../util/util.dart';
+
 class FichaCard extends StatelessWidget {
   const FichaCard({super.key, required this.output, required this.detalles});
   final String output;
@@ -10,7 +12,7 @@ class FichaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: DecorationStyle.greyBorder,
+      decoration: DecorationStyle.greyBorder(),
       padding: const EdgeInsets.all(15),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -36,7 +38,7 @@ class FichaCard extends StatelessWidget {
                     margin: index == detalles.length - 1
                         ? const EdgeInsets.only(right: 0)
                         : const EdgeInsets.only(right: 5),
-                    decoration: DecorationStyle.greyBorder,
+                    decoration: DecorationStyle.greyBorder(),
                     alignment: Alignment.center,
                     padding: const EdgeInsets.all(5),
                     child: Text('${detail.horaDesde} - ${detail.horaHasta}',  style: TextStyleS.textGlobal(
