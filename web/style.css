@@ -1,0 +1,29 @@
+@keyframes tipsy {
+    0 {
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(-50%) rotate(360deg);
+    }
+}
+
+
+body {
+    background-color: #f3efff;
+     font-family: 'EuclidCircularA', sans-serif;
+}
+
+
+a {
+    color: black;
+    font-size: 60px;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: -3px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}

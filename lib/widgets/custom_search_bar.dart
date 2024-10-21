@@ -99,7 +99,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 
   Future<void> _search() async {
     if (_idController.text.isEmpty) {
-      _showMessages('Por favor, ingrese un ID y seleccione un tipo.');
+      _showMessages('Por favor, ingrese un ID y seleccione un tipo.', 'Alerta');
       return;
     }
 
@@ -111,17 +111,52 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           await fetchNotificacion(idValue, idType);
       widget.handleSearch(notification);
     } catch (e) {
-      _showMessages('Error: $e');
+      _showMessages('Valor no encontrado', 'ERROR');
     }
   }
 
-  void _showMessages(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-      ),
+  void _showMessages(String message, String messageTitle) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            messageTitle.toUpperCase(),
+            style: TextStyleS.textGlobal(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+                color: ColorStyle.backgroundOrange),
+          ),
+          content: Text(
+            message,
+            style: TextStyleS.textGlobal(),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'OK',
+                style: TextStyleS.textGlobal(
+                    fontWeight: FontWeight.bold, fontSize: 20.0),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Cerrar la alerta
+              },
+            ),
+          ],
+        );
+      },
     );
   }
+
+  // void _showMessages(String message) {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //
+  //     SnackBar(
+  //       backgroundColor: ColorStyle.backgroundOrange,
+  //       content: Text(message),
+  //     ),
+  //   );
+  // }
 
   Future<NotificationResponse> fetchNotificacion(
       String idValue, String idType) async {

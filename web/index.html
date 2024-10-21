@@ -28,11 +28,33 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="stylesheet" href="style.css">
 
-  <title>cnel_ficha</title>
+  <title>Horarios CNEL </title>
   <link rel="manifest" href="manifest.json">
 </head>
-<body>
+<body style="overflow: hidden">
+<a id="loadingIndicator" style="display: none;">TINGUAR.COM</a>
   <script src="flutter_bootstrap.js" async></script>
+<script>
+    window.addEventListener('load', function() {
+      // Show the loading indicator
+      var loadingIndicator = document.getElementById('loadingIndicator');
+      loadingIndicator.style.display = 'block';
+
+      // Initialize the Flutter application
+      _flutter.loader.loadEntrypoint({
+      serviceWorker: {
+      serviceWorkerVersion: serviceWorkerVersion,
+    },
+    onEntrypointLoaded: function(engineInitializer) {
+      engineInitializer.initializeEngine().then(function(appRunner) {
+        appRunner.runApp();
+      });
+    }
+});
+
+    });
+  </script>
 </body>
 </html>
