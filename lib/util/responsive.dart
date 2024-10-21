@@ -24,8 +24,8 @@ class Responsive extends StatelessWidget {
 }
 
 enum BreackPoints {
-  mobile(400),
-  mobileLarge(700),
+  mobile(485),
+  mobileLarge(767),
   tablet(1024),
   desktop(1024);
 

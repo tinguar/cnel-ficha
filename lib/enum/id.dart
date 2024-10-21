@@ -1,3 +1,4 @@
+// TODO(Alberto): corregir el nombre de la variable del enum...
 enum IdType {
   IDENTIFICACION,
   CUENTA_CONTRATO,
