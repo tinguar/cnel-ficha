@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cnel_ficha/enum/enum.dart';
 import 'package:cnel_ficha/model/planification.dart';
+import 'package:cnel_ficha/search_screen.dart';
 import 'package:cnel_ficha/util/regx.dart';
 import 'package:cnel_ficha/util/responsive.dart';
 import 'package:flutter/material.dart';
@@ -69,28 +70,27 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           flex: 1,
           child: Container(
             decoration: BoxDecoration(
-                color: const Color(0xff272e3f),
+                color: ColorStyle.backgroundBlack,
                 border: Border.all(),
                 borderRadius: BorderRadius.circular(5)),
             height: 45,
             child: InkWell(
-              onTap: _search,
-              child: context.isDesktop || context.isTablet
-                  ? const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Center(
-                          child: Text(
-                        'Buscar',
-                        style: TextStyle(color: Colors.white),
-                      )))
-                  : const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.search_sharp,
-                        color: Colors.white,
-                      ),
-                    ),
-            ),
+                onTap: _search,
+                child: context.isMobile
+                    ? const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.search_sharp,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                            child: Text(
+                          'Buscar',
+                          style: TextStyle(color: Colors.white),
+                        )))),
           ),
         ),
       ],

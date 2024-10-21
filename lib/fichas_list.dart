@@ -30,8 +30,8 @@ class FichasList extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: getCrossAxisCount(context),
         childAspectRatio: aspectRatio(),
-        crossAxisSpacing: 5,
-        mainAxisSpacing: 5,
+        crossAxisSpacing: 10.0,
+        mainAxisSpacing: 10.0,
       ),
       itemCount: _groupDetailsByDate(notification.detallePlanificacion).length,
       itemBuilder: (context, index) {
