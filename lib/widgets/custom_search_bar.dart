@@ -6,7 +6,6 @@ import 'package:cnel_ficha/util/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'dart:developer';
 
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({super.key, required this.handleSearch});
@@ -130,7 +129,6 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         'https://api.cnelep.gob.ec/servicios-linea/v1/notificaciones/consultar/$idValue/$idType'));
 
     if (response.statusCode == 200) {
-      log(json.decode(response.body));
       String responseBody = utf8.decode(response.bodyBytes);
       return NotificationResponse.fromJson(json.decode(responseBody));
     } else {

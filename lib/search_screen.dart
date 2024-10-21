@@ -27,9 +27,9 @@ class _SearchScreenState extends State<SearchScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomSearchBar(
-                handleSearch: (notificacion) {
+                handleSearch: (notificacionResponse) {
                   setState(() {
-                    _notificacionResponse = notificacion;
+                    _notificacionResponse = notificacionResponse;
                   });
                 },
               ),
