@@ -9,3 +9,4 @@ cnel_ficha
 ## Colaboradores:
 
 - [ALBERTO GUAMAN](https://albertoguaman.com/)
+- [CHRISTOPHER BOBADILLA](https://github.com/ChrisBP-Dev)
