@@ -67,9 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
       ),
       body: SingleChildScrollView(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return Padding(
+        child: Padding(
               padding: EdgeInsets.symmetric(horizontal: reponsiveS(context)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,7 +207,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: getCrossAxisCount(context),
-                                childAspectRatio: 1.6,
+                                childAspectRatio: 2.5,
                                 crossAxisSpacing: 5,
                                 mainAxisSpacing: 5,
                               ),
@@ -228,6 +226,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 final RegExp regex = RegExp(r'de 2024');
                                 String output = input.replaceAll(regex, '');
                                 return Container(
+
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
                                     border: Border.all(
@@ -238,7 +237,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize
-                                          .min, // Respetar el tamaño mínimo de la columna
+                                          .min,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
@@ -246,29 +245,36 @@ class _SearchScreenState extends State<SearchScreen> {
                                             style: const TextStyle(
                                                 fontWeight: FontWeight.bold)),
                                         ...detalles.map((detail) {
-                                          return Card(
-                                            elevation: 4,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisSize: MainAxisSize
-                                                    .min, // Respetar el tamaño mínimo de la columna
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                          'Desde: ${detail.horaDesde}'),
-                                                      const SizedBox(
-                                                          width: 15.0),
-                                                      Text(
-                                                          'Hasta: ${detail.horaHasta}'),
-                                                    ],
-                                                  ),
-                                                  // Más detalles pueden ir aquí si es necesario
-                                                ],
+                                          return Padding(
+                                            padding: const EdgeInsets.all(5),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.red,
+                                                border: Border.all(),
+                                                borderRadius: BorderRadius.circular(5)
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisSize: MainAxisSize
+                                                      .min, // Respetar el tamaño mínimo de la columna
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                            'Desde: ${detail.horaDesde}'),
+                                                        const SizedBox(
+                                                            width: 15.0),
+                                                        Text(
+                                                            'Hasta: ${detail.horaHasta}'),
+                                                      ],
+                                                    ),
+                                                    // Más detalles pueden ir aquí si es necesario
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           );
@@ -287,8 +293,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   const SizedBox(height: 50.0),
                 ],
               ),
-            );
-          },
+
         ),
       ),
     );
