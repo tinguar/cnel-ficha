@@ -66,102 +66,140 @@ class _SearchScreenState extends State<SearchScreen> {
         pdf.addPage(
           pw.Page(
             build: (pw.Context context) {
-              return pw.Column(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text(
-                    'Contrato: ${notification.cuentaContrato}',
-                    style: pw.TextStyle(
-                      font: robotoFont,
-                      fontWeight: pw.FontWeight.bold,
-                      fontSize: 20,
+              return pw.Stack(children: [
+                pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    pw.Text(
+                      'Contrato: ${notification.cuentaContrato}',
+                      style: pw.TextStyle(
+                        font: robotoFont,
+                        fontWeight: pw.FontWeight.bold,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                  pw.Text(
-                    'Alimentador: ${notification.alimentador}',
-                    style: pw.TextStyle(font: robotoFont),
-                  ),
-                  pw.Text(
-                    'Código: ${notification.cuen}',
-                    style: pw.TextStyle(font: robotoFont),
-                  ),
-                  pw.Text(
-                    'Dirección: ${notification.direccion}',
-                    style: pw.TextStyle(font: robotoFont),
-                  ),
-                  pw.Divider(),
-                  pw.Text(
-                    'Detalles de Planificación:',
-                    style: pw.TextStyle(
-                      font: robotoFont,
-                      fontWeight: pw.FontWeight.bold,
-                      fontSize: 20,
+                    pw.Text(
+                      'Alimentador: ${notification.alimentador}',
+                      style: pw.TextStyle(font: robotoFont),
                     ),
-                  ),
+                    pw.Text(
+                      'Código: ${notification.cuen}',
+                      style: pw.TextStyle(font: robotoFont),
+                    ),
+                    pw.Text(
+                      'Dirección: ${notification.direccion}',
+                      style: pw.TextStyle(font: robotoFont),
+                    ),
+                    pw.Divider(),
+                    pw.Text(
+                      'Detalles de Planificación:',
+                      style: pw.TextStyle(
+                        font: robotoFont,
+                        fontWeight: pw.FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
 
-                  // Add grid-like details here
-                  pw.Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: groupedDetails.entries.map((entry) {
-                      String fechaCorte = entry.key;
-                      List<PlanningDetail> detalle = entry.value;
+                    // Add grid-like details here
+                    pw.Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: groupedDetails.entries.map((entry) {
+                        String fechaCorte = entry.key;
+                        List<PlanningDetail> detalle = entry.value;
 
-                      String output =
-                          fechaCorte.replaceAll(RegExp(r'de 2024'), '');
+                        String output =
+                            fechaCorte.replaceAll(RegExp(r'de 2024'), '');
 
-                      return pw.Container(
-                        padding: const pw.EdgeInsets.all(8),
-                        decoration: pw.BoxDecoration(
-                          border: pw.Border.all(color: PdfColors.grey),
-                          borderRadius: pw.BorderRadius.circular(5),
-                        ),
-                        child: pw.Column(
-                          crossAxisAlignment: pw.CrossAxisAlignment.start,
-                          children: [
-                            pw.Text(
-                              output,
-                              style: pw.TextStyle(
-                                font: robotoFont,
-                                color: ColorPdf.colorBlack,
-                                fontWeight: pw.FontWeight.bold,
+                        return pw.Container(
+                          padding: const pw.EdgeInsets.all(8),
+                          decoration: pw.BoxDecoration(
+                            border: pw.Border.all(color: PdfColors.grey),
+                            borderRadius: pw.BorderRadius.circular(5),
+                          ),
+                          child: pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              pw.Text(
+                                output,
+                                style: pw.TextStyle(
+                                  font: robotoFont,
+                                  color: ColorPdf.colorBlack,
+                                  fontWeight: pw.FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            ...detalle
-                                .map(
-                                  (detalle) => pw.Container(
-                                    decoration: pw.BoxDecoration(
-                                      border:
-                                          pw.Border.all(color: PdfColors.grey),
-                                      borderRadius: pw.BorderRadius.circular(5),
-                                    ),
-                                    padding: const pw.EdgeInsets.all(2),
-                                    margin: const pw.EdgeInsets.all(2),
-                                    child: pw.Text(
-                                      '${detalle.horaDesde} - ${detalle.horaHasta}',
-                                      style: pw.TextStyle(
-                                        font: robotoFont,
-                                        fontSize: 15.0,
-                                        fontWeight: pw.FontWeight.bold,
-                                        color: ColorPdf.colorBlack,
+                              ...detalle
+                                  .map(
+                                    (detalle) => pw.Container(
+                                      decoration: pw.BoxDecoration(
+                                        border: pw.Border.all(
+                                            color: PdfColors.grey),
+                                        borderRadius:
+                                            pw.BorderRadius.circular(5),
+                                      ),
+                                      padding: const pw.EdgeInsets.all(2),
+                                      margin: const pw.EdgeInsets.all(2),
+                                      child: pw.Text(
+                                        '${detalle.horaDesde} - ${detalle.horaHasta}',
+                                        style: pw.TextStyle(
+                                          font: robotoFont,
+                                          fontSize: 15.0,
+                                          fontWeight: pw.FontWeight.bold,
+                                          color: ColorPdf.colorBlack,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                                .toList(),
-                          ],
-                        ),
-                      );
-                    }).toList(),
-                  ),
+                                  )
+                                  .toList(),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
 
-                  pw.SizedBox(height: 20), // Espacio entre notificaciones
-                ],
-              );
+                    pw.SizedBox(height: 20), // Espacio entre notificaciones
+                  ],
+                ),  pw.Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: pw.Container(
+                    alignment: pw.Alignment.centerRight,
+                    padding: const pw.EdgeInsets.only(right: 20.0, top: 10.0),
+                    child: pw.Text(
+                      'Este es un sitio independiente, realizado por TINGUAR.COM',
+                      style: pw.TextStyle(
+                        font: robotoFont,
+                        fontSize: 12,
+                        color: PdfColors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+              ],);
             },
           ),
         );
       }
+
+      // pw.Positioned(
+      //   top: 200,
+      //   left: 100,
+      //   child: pw.Transform.rotate(
+      //     angle: -0.5,
+      //     child: pw.Opacity(
+      //       opacity: 0.2,
+      //       child: pw.Text(
+      //         'tinguar.com'.toUpperCase(),
+      //         style: pw.TextStyle(
+      //           font: robotoFont,
+      //           fontSize: 60,
+      //           color: PdfColors.grey,
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      // ),
 
       // Guardar el PDF como bytes
       final Uint8List pdfData = await pdf.save();
@@ -232,7 +270,6 @@ class _SearchScreenState extends State<SearchScreen> {
                             },
                           ),
                           const SizedBox(height: 20),
-
                         ],
                       ),
                     ),
@@ -253,15 +290,18 @@ class _SearchScreenState extends State<SearchScreen> {
                                 decoration: DecorationStyle.greyBorder(
                                     color: ColorStyle.backgroundBlack),
                                 height: 45,
-                                child: const Padding(
+                                child: Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Center(
                                         child: Text(
-                                          'Descargar PDF del horario                          ',
-                                          style: TextStyle(color: Colors.white),
-                                        ))),
+                                      'Descargar horario en pdf'.toUpperCase(),
+                                      style:
+                                          const TextStyle(color: Colors.white),
+                                      textAlign: TextAlign.center,
+                                    ))),
                               ),
-                            ),const SizedBox(height: 20),
+                            ),
+                            const SizedBox(height: 20),
                             Container(
                               decoration: DecorationStyle.greyBorder(),
                               child: Padding(
@@ -302,7 +342,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 20.0),
                                             ),
-                                            FichasList(notification: notification),
+                                            FichasList(
+                                                notification: notification),
                                           ],
                                         );
                                       }),
