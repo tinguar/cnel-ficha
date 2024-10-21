@@ -3,7 +3,7 @@ class NotificationResponse {
   final String? mensaje;
   final String? mensajeError;
   final String? extra;
-  final List<Notification> notificaciones;
+  final List<NotificationF> notificaciones;
 
   NotificationResponse({
     required this.resp,
@@ -20,7 +20,7 @@ class NotificationResponse {
       mensajeError: json['mensajeError'],
       extra: json['extra'],
       notificaciones: (json['notificaciones'] as List)
-          .map((e) => Notification.fromJson(e))
+          .map((e) => NotificationF.fromJson(e))
           .toList(),
     );
   }
@@ -36,7 +36,7 @@ class NotificationResponse {
   }
 }
 
-class Notification {
+class NotificationF {
   final int idUnidadNegocios;
   final String cuentaContrato;
   final String alimentador;
@@ -45,7 +45,7 @@ class Notification {
   final String fechaRegistro;
   final List<PlanningDetail> detallePlanificacion;
 
-  Notification({
+  NotificationF({
     required this.idUnidadNegocios,
     required this.cuentaContrato,
     required this.alimentador,
@@ -55,8 +55,8 @@ class Notification {
     required this.detallePlanificacion,
   });
 
-  factory Notification.fromJson(Map<String, dynamic> json) {
-    return Notification(
+  factory NotificationF.fromJson(Map<String, dynamic> json) {
+    return NotificationF(
       idUnidadNegocios: json['idUnidadNegocios'],
       cuentaContrato: json['cuentaContrato'],
       alimentador: json['alimentador'],
@@ -77,7 +77,8 @@ class Notification {
       'cuen': cuen,
       'direccion': direccion,
       'fechaRegistro': fechaRegistro,
-      'detallePlanificacion': detallePlanificacion.map((e) => e.toJson()).toList(),
+      'detallePlanificacion':
+          detallePlanificacion.map((e) => e.toJson()).toList(),
     };
   }
 }
