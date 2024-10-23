@@ -45,6 +45,9 @@ dependencies:
   printing: ^5.13.3
   google_fonts: ^6.2.1
   icons_launcher: ^3.0.0
+  flutter_markdown: ^0.7.4+1
+  go_router: ^14.3.0
+  url_strategy: ^0.3.0
 
 
 icons_launcher:
@@ -84,6 +87,7 @@ flutter:
   assets:
     - assets/fonts/roboto/
     - assets/image/
+    - assets/md/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

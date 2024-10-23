@@ -5,6 +5,7 @@ class ColorStyle {
   static Color backgroundBlack = const Color(0xff272e3f);
   static Color background = const Color(0xfff3efff);
   static Color colorGrey = const Color(0xff7f8c9f);
+  static Color colorBlue = const Color(0xff2196f3);
   static Color backgroundOrange = const Color(0xfff37474);
 }
 
@@ -40,4 +41,11 @@ class TextStyleS {
       decorationColor: decorationColor ?? Colors.transparent,
     );
   }
+
+  static TextStyle textLink = TextStyle(
+    color: ColorStyle.colorBlue,
+    fontWeight: FontWeight.bold,
+    fontSize: 16,
+    decoration: TextDecoration.underline,
+  );
 }

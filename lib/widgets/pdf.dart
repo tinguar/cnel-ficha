@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart' as google_fonts;
 import 'package:path_provider/path_provider.dart';
 
-// import 'dart:html' as html;
+import 'dart:html' as html;
 import 'package:flutter/foundation.dart';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
@@ -180,21 +180,21 @@ Future<void> generatePdf(BuildContext context, NotificationResponse? _notificaci
   final Uint8List pdfData = await pdf.save();
 
   // Manejar la descarga del PDF para diferentes plataformas
-  // if (kIsWeb) {
-  //   // Lógica para la web
-  //   final blob = html.Blob([pdfData]);
-  //   final url = html.Url.createObjectUrlFromBlob(blob);
-  //   final anchor = html.AnchorElement(href: url)
-  //     ..setAttribute('download', 'document.pdf')
-  //     ..click();
-  //   html.Url.revokeObjectUrl(url);
-  // } else {
-  //   // Lógica para Android
-  //   final directory = await getApplicationDocumentsDirectory();
-  //   final file = File('${directory.path}/captura.pdf');
-  //   await file.writeAsBytes(pdfData);
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     SnackBar(content: Text('PDF guardado en ${file.path}')),
-  //   );
-  // }
+  if (kIsWeb) {
+    // Lógica para la web
+    final blob = html.Blob([pdfData]);
+    final url = html.Url.createObjectUrlFromBlob(blob);
+    final anchor = html.AnchorElement(href: url)
+      ..setAttribute('download', 'document.pdf')
+      ..click();
+    html.Url.revokeObjectUrl(url);
+  } else {
+    // Lógica para Android
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/captura.pdf');
+    await file.writeAsBytes(pdfData);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('PDF guardado en ${file.path}')),
+    );
+  }
 }
