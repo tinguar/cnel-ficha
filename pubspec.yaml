@@ -44,6 +44,20 @@ dependencies:
   pdf: ^3.11.1
   printing: ^5.13.3
   google_fonts: ^6.2.1
+  icons_launcher: ^3.0.0
+
+
+icons_launcher:
+  image_path: "assets/image/logo_horarios_ec.png"
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: false
+    web:
+      generate: true
+      image_path: 'assets/image/logo_horarios_ec.png'
+      favicon_path: 'assets/image/ico.png'
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +83,7 @@ flutter:
 
   assets:
     - assets/fonts/roboto/
+    - assets/image/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
