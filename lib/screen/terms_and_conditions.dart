@@ -6,6 +6,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:go_router/go_router.dart';
 
 import '../util/class.dart';
+import '../widgets/footer.dart';
 
 class TermsAndConditionsScreen extends StatelessWidget {
   const TermsAndConditionsScreen({super.key});
@@ -55,6 +56,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
                         } else {
                           return ResponsiveCenter(
                               child: Markdown(
+                                physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true, data: snapshot.data ?? ''));
                         }
                       },

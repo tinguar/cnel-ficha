@@ -4,7 +4,7 @@ cnel_ficha
 
 ## Sitio desplegado en Firebase Hosting
 - [CNEL FICHA DE CORTE](https://cnel-ficha.web.app/)
-- [REALIZADO POR:](https://cnel-ficha.web.app/)
+- [REALIZADO POR:](https://tinguar.com)
 
 ## Colaboradores:
 

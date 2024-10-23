@@ -42,10 +42,12 @@ class TextStyleS {
     );
   }
 
-  static TextStyle textLink = TextStyle(
-    color: ColorStyle.colorBlue,
-    fontWeight: FontWeight.bold,
-    fontSize: 16,
-    decoration: TextDecoration.underline,
-  );
+  static TextStyle textLink ({TextDecoration? decoration, double? fontSize}) {
+    return TextStyle(
+      color: ColorStyle.colorBlue,
+      fontWeight: FontWeight.bold,
+      fontSize:fontSize ?? 16,
+      decoration: decoration  ?? TextDecoration.underline,
+    );
+  }
 }
