@@ -1,6 +1,6 @@
 # cnel_ficha
 
-cnel_ficha
+Este programa se realizo con FLUTTER, y esta utilizando FIREBASE para el hostin.
 
 ## Sitio desplegado en Firebase Hosting
 - [CNEL FICHA DE CORTE](https://cnel-ficha.web.app/)
