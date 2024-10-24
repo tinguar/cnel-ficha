@@ -8,5 +8,8 @@ cnel_ficha
 
 ## Colaboradores:
 
-- [ALBERTO GUAMAN](https://albertoguaman.com/)
-- [CHRISTOPHER BOBADILLA](https://github.com/ChrisBP-Dev)
+- DESARROLLADORES:
+  - [ALBERTO GUAMAN](https://albertoguaman.com/)
+  - [CHRISTOPHER BOBADILLA](https://github.com/ChrisBP-Dev)
+- DISEÑO DE INSPIRACIÓN: 
+  - [JAVIER VINUEZA](https://github.com/Javiervinus)
