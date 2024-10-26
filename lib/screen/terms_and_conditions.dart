@@ -1,4 +1,3 @@
-import 'package:cnel_ficha/search_screen.dart';
 import 'package:cnel_ficha/widgets/responsive_center.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,17 +24,18 @@ class TermsAndConditionsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                icon: const Icon(Icons.arrow_back,),
+                icon: const Icon(
+                  Icons.arrow_back,
+                ),
                 onPressed: () {
                   context.go('/');
                 },
               ),
               const SizedBox(width: 20.0),
-               Text('Términos y Condiciones'.toUpperCase()),
+              Text('Términos y Condiciones'.toUpperCase()),
             ],
           ),
           centerTitle: true,
-
         ),
         body: Column(
           children: [
@@ -56,8 +56,9 @@ class TermsAndConditionsScreen extends StatelessWidget {
                         } else {
                           return ResponsiveCenter(
                               child: Markdown(
-                                physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true, data: snapshot.data ?? ''));
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  data: snapshot.data ?? ''));
                         }
                       },
                     ),
