@@ -10,7 +10,7 @@ class ColorStyle {
 }
 
 class ColorPdf {
-  static final colorBlack = PdfColor.fromInt(0xff272e3f);
+  static const colorBlack = PdfColor.fromInt(0xff272e3f);
 }
 
 class DecorationStyle {
@@ -42,12 +42,12 @@ class TextStyleS {
     );
   }
 
-  static TextStyle textLink ({TextDecoration? decoration, double? fontSize}) {
+  static TextStyle textLink({TextDecoration? decoration, double? fontSize}) {
     return TextStyle(
       color: ColorStyle.colorBlue,
       fontWeight: FontWeight.bold,
-      fontSize:fontSize ?? 16,
-      decoration: decoration  ?? TextDecoration.underline,
+      fontSize: fontSize ?? 16,
+      decoration: decoration ?? TextDecoration.underline,
     );
   }
 }

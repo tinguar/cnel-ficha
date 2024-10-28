@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'package:cnel_ficha/enum/enum.dart';
 import 'package:cnel_ficha/model/planification.dart';
-import 'package:cnel_ficha/search_screen.dart';
-import 'package:cnel_ficha/util/regx.dart';
-import 'package:cnel_ficha/util/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -77,26 +74,30 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             ),
             height: 45,
             child: InkWell(
-              onTap: _isLoading ? null : _search, // Deshabilitar el botón mientras carga
-              child: _isLoading // Mostrar indicador de carga o botón de búsqueda
-                  ? Center(child: CircularProgressIndicator(color: Colors.white))
-                  : context.isMobile
-                  ? const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.search_sharp,
-                  color: Colors.white,
-                ),
-              )
-                  : const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Center(
-                  child: Text(
-                    'Buscar',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
+              onTap: _isLoading
+                  ? null
+                  : _search, // Deshabilitar el botón mientras carga
+              child:
+                  _isLoading // Mostrar indicador de carga o botón de búsqueda
+                      ? const Center(
+                          child: CircularProgressIndicator(color: Colors.white))
+                      : context.isMobile
+                          ? const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.search_sharp,
+                                color: Colors.white,
+                              ),
+                            )
+                          : const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Text(
+                                  'Buscar',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
             ),
           ),
         ),
@@ -116,9 +117,10 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 
     try {
       String idValue = _idController.text;
-      String idType = _selectedIdType.toString().split('.').last; // Convertir a string
+      String idType =
+          _selectedIdType.toString().split('.').last; // Convertir a string
       NotificationResponse notification =
-      await fetchNotificacion(idValue, idType);
+          await fetchNotificacion(idValue, idType);
       widget.handleSearch(notification);
     } catch (e) {
       _showMessages('Valor no encontrado', 'ERROR');

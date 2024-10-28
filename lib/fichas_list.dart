@@ -2,57 +2,49 @@ import 'package:cnel_ficha/model/planification.dart';
 import 'package:cnel_ficha/util/responsive.dart';
 import 'package:cnel_ficha/widgets/ficha_card.dart';
 import 'package:flutter/material.dart';
-import 'package:pdf/widgets.dart' as pw;
 
 class FichasList extends StatelessWidget {
   const FichasList({super.key, required this.notification});
   final NotificationF notification;
 
-
   @override
   Widget build(BuildContext context) {
-    double aspectRatio() {
-      // Aspect ratio para el grid - juega con los valores para cada escenario
-      if (context.isMobile) return 2.91;
-      if (context.isMobileLarge) return 4.91;
-      if (context.isTablet) return 3.45;
-      return 3.15;
-    }
-
-    int getCrossAxisCount(BuildContext context) {
-      if (context.isMobileLarge) return 1;
-      if (context.isTablet) return 2;
-      return 3;
-    }
-
-    return GridView.builder(
-      physics:
-          const NeverScrollableScrollPhysics(), // Evita el scroll dentro del grid
-      shrinkWrap: true,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: getCrossAxisCount(context),
-        childAspectRatio: aspectRatio(),
-        crossAxisSpacing: 10.0,
-        mainAxisSpacing: 10.0,
-      ),
-      itemCount: groupDetailsByDate(notification.detallePlanificacion).length,
-      itemBuilder: (context, index) {
-        String fechaCorte =
-        groupDetailsByDate(notification.detallePlanificacion)
-                .keys
-                .elementAt(index);
-        List<PlanningDetail> detalles =
-        groupDetailsByDate(notification.detallePlanificacion)[fechaCorte]!;
-        String input = fechaCorte;
-        final RegExp regex = RegExp(r'de 2024');
-        String output = input.replaceAll(regex, '');
-        return FichaCard(output: output, detalles: detalles);
-      },
-    );
+    const padding = 10.0;
+    return LayoutBuilder(builder: (context, constraints) {
+      final width = constraints.maxWidth <= BreakPoint.mobile.value
+          ? constraints.maxWidth // 1 card en mobile
+          : (constraints.maxWidth <= BreakPoint.mobileLarge.value
+              ? (constraints.maxWidth / 2) - (padding / 2) // 2 cards en tablet
+              : (constraints.maxWidth / 3) -
+                  (padding / 1.5)); // 3 cards en desktop
+      return Wrap(
+        spacing: padding,
+        runSpacing: padding,
+        children: [
+          ...List.generate(
+              groupDetailsByDate(notification.detallePlanificacion).length,
+              (index) {
+            String fechaCorte =
+                groupDetailsByDate(notification.detallePlanificacion)
+                    .keys
+                    .elementAt(index);
+            List<PlanningDetail> detalles = groupDetailsByDate(
+                notification.detallePlanificacion)[fechaCorte]!;
+            String input = fechaCorte;
+            final RegExp regex = RegExp(r'de 2024');
+            String output = input.replaceAll(regex, '');
+            return FichaCard(
+              output: output,
+              detalles: detalles,
+              widthCard: width,
+            );
+          }),
+        ],
+      );
+    });
   }
-
-
 }
+
 Map<String, List<PlanningDetail>> groupDetailsByDate(
     List<PlanningDetail> detalles) {
   Map<String, List<PlanningDetail>> groupedDetails = {};

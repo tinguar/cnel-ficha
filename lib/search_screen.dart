@@ -1,15 +1,11 @@
 import 'package:cnel_ficha/fichas_list.dart';
 import 'package:cnel_ficha/model/planification.dart';
-import 'package:cnel_ficha/util/router.dart';
 import 'package:cnel_ficha/util/util.dart';
 import 'package:cnel_ficha/widgets/custom_search_bar.dart';
 import 'package:cnel_ficha/widgets/footer.dart';
 import 'package:cnel_ficha/widgets/pdf.dart';
 import 'package:cnel_ficha/widgets/responsive_center.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // for testing purposes
@@ -24,7 +20,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   NotificationResponse? _notificacionResponse;
-  GlobalKey _globalKey = GlobalKey(); // Clave para el RepaintBoundary
+  final GlobalKey _globalKey = GlobalKey(); // Clave para el RepaintBoundary
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +82,6 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                           ),
                           const SizedBox(height: 10.0),
-
                           Text(
                             'Aquí puedes acceder a los horarios de cortes de luz programados por CNEL en tu zona.',
                             style: TextStyleS.textGlobal(),
@@ -122,7 +117,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     color: ColorStyle.backgroundBlack),
                                 height: 45,
                                 child: Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                         child: Text(
                                       'Descargar horario en pdf'.toUpperCase(),

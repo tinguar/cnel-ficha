@@ -2,37 +2,32 @@ import 'dart:io';
 import 'package:cnel_ficha/fichas_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart' as google_fonts;
 import 'package:path_provider/path_provider.dart';
 
 import 'dart:html' as html;
 import 'package:flutter/foundation.dart';
-import 'dart:ui' as ui;
-import 'dart:typed_data';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
 
 import '../model/model.dart';
 import '../util/util.dart';
 
-
-Future<void> generatePdf(BuildContext context, NotificationResponse? _notificacionResponse) async {
-
+Future<void> generatePdf(
+    BuildContext context, NotificationResponse? notificacionResponse) async {
   final pdf = pw.Document();
 
   final fontData =
-  await rootBundle.load('assets/fonts/roboto/Roboto-Regular.ttf');
+      await rootBundle.load('assets/fonts/roboto/Roboto-Regular.ttf');
   final robotoFont = pw.Font.ttf(fontData.buffer.asByteData());
 
   // Verifica que haya datos en _notificacionResponse
-  if (_notificacionResponse == null) return;
+  if (notificacionResponse == null) return;
 
   // Iterar sobre cada notificación y crear una nueva página
-  for (var notification in _notificacionResponse!.notificaciones) {
+  for (var notification in notificacionResponse.notificaciones) {
     // Agrupar detalles por fecha
     final groupedDetails =
-    groupDetailsByDate(notification.detallePlanificacion);
+        groupDetailsByDate(notification.detallePlanificacion);
 
     // Agregar una nueva página para cada notificación
     pdf.addPage(
@@ -82,7 +77,7 @@ Future<void> generatePdf(BuildContext context, NotificationResponse? _notificaci
                       List<PlanningDetail> detalle = entry.value;
 
                       String output =
-                      fechaCorte.replaceAll(RegExp(r'de 2024'), '');
+                          fechaCorte.replaceAll(RegExp(r'de 2024'), '');
 
                       return pw.Container(
                         padding: const pw.EdgeInsets.all(8),
@@ -101,14 +96,11 @@ Future<void> generatePdf(BuildContext context, NotificationResponse? _notificaci
                                 fontWeight: pw.FontWeight.bold,
                               ),
                             ),
-                            ...detalle
-                                .map(
-                                  (detalle) => pw.Container(
+                            ...detalle.map(
+                              (detalle) => pw.Container(
                                 decoration: pw.BoxDecoration(
-                                  border: pw.Border.all(
-                                      color: PdfColors.grey),
-                                  borderRadius:
-                                  pw.BorderRadius.circular(5),
+                                  border: pw.Border.all(color: PdfColors.grey),
+                                  borderRadius: pw.BorderRadius.circular(5),
                                 ),
                                 padding: const pw.EdgeInsets.all(2),
                                 margin: const pw.EdgeInsets.all(2),
@@ -122,8 +114,7 @@ Future<void> generatePdf(BuildContext context, NotificationResponse? _notificaci
                                   ),
                                 ),
                               ),
-                            )
-                                .toList(),
+                            ),
                           ],
                         ),
                       );
@@ -184,6 +175,7 @@ Future<void> generatePdf(BuildContext context, NotificationResponse? _notificaci
     // Lógica para la web
     final blob = html.Blob([pdfData]);
     final url = html.Url.createObjectUrlFromBlob(blob);
+    // TODO(Alberto): revisa esto, no parece que lo estes usando...
     final anchor = html.AnchorElement(href: url)
       ..setAttribute('download', 'document.pdf')
       ..click();
