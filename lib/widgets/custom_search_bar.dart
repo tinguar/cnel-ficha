@@ -28,80 +28,98 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Flexible(
-          flex: 2,
-          child: TextField(
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegexUtils.numberR)
-            ],
-            controller: _idController,
-            decoration: const InputDecoration(
-              hintText: 'Buscar',
-              border: OutlineInputBorder(),
+        Row(
+          children: [
+            Flexible(
+              flex: 2,
+              child: TextField(
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegexUtils.numberR)
+                ],
+                controller: _idController,
+                decoration: const InputDecoration(
+                  hintText: 'Buscar',
+                  border: OutlineInputBorder(),
+                ),
+              ),
             ),
-          ),
+            const SizedBox(width: 10.0),
+            Flexible(
+              flex: 3,
+              child: DropdownButtonFormField<IdType>(
+                value: _selectedIdType,
+                items: idTypes.map((idType) {
+                  return DropdownMenuItem<IdType>(
+                    value: idType['value'] as IdType,
+                    child: Text(idType['label'] as String),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  setState(() {
+                    _selectedIdType = newValue!;
+                  });
+                },
+                decoration: const InputDecoration(
+                  hintText: 'Tipo',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            context.isMobile ?  Container() : const  SizedBox(width: 10.0),
+            Responsive(
+                mobile: Container(),
+                mobileLarge: buttonSearchWidget(),
+                tablet: buttonSearchWidget(),
+                desktop: buttonSearchWidget())
+          ],
         ),
-        const SizedBox(width: 10.0),
-        Flexible(
-          flex: 3,
-          child: DropdownButtonFormField<IdType>(
-            value: _selectedIdType,
-            items: idTypes.map((idType) {
-              return DropdownMenuItem<IdType>(
-                value: idType['value'] as IdType,
-                child: Text(idType['label'] as String),
-              );
-            }).toList(),
-            onChanged: (newValue) {
-              setState(() {
-                _selectedIdType = newValue!;
-              });
-            },
-            decoration: const InputDecoration(
-              hintText: 'Tipo',
-              border: OutlineInputBorder(),
-            ),
-          ),
-        ),
-        const SizedBox(width: 10.0),
-        Flexible(
-          flex: 1,
-          child: Container(
-            decoration: DecorationStyle.greyBorder(
-              color: ColorStyle.backgroundBlack,
-            ),
-            height: 45,
-            child: InkWell(
-              onTap: _isLoading
-                  ? null
-                  : _search, // Deshabilitar el botón mientras carga
-              child:
-                  _isLoading // Mostrar indicador de carga o botón de búsqueda
-                      ? const Center(
-                          child: CircularProgressIndicator(color: Colors.white))
-                      : context.isMobile
-                          ? const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.search_sharp,
-                                color: Colors.white,
-                              ),
-                            )
-                          : const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Text(
-                                  'Buscar',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-            ),
-          ),
-        ),
+        context.isMobile
+            ? Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15.0),
+                child: buttonSearchWidget(flex: 0, width: double.infinity),
+              )
+            : Container()
       ],
+    );
+  }
+
+  Widget buttonSearchWidget({int? flex, double? width}) {
+    return Flexible(
+      flex: flex ?? 1,
+      child: Container(
+        decoration: DecorationStyle.greyBorder(
+          color: ColorStyle.backgroundBlack,
+        ),
+        width: width,
+        height: 45,
+        child: InkWell(
+          onTap: _isLoading
+              ? null
+              : _search, // Deshabilitar el botón mientras carga
+          child: _isLoading // Mostrar indicador de carga o botón de búsqueda
+              ? const Center(
+                  child: CircularProgressIndicator(color: Colors.white))
+              : context.isMobile
+                  ? const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.search_sharp,
+                        color: Colors.white,
+                      ),
+                    )
+                  : const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          'Buscar',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+        ),
+      ),
     );
   }
 
