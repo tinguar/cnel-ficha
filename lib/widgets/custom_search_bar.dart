@@ -28,59 +28,45 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: [
-        Row(
-          children: [
-            Flexible(
-              flex: 2,
-              child: TextField(
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegexUtils.numberR)
-                ],
-                controller: _idController,
-                decoration: const InputDecoration(
-                  hintText: 'Buscar',
-                  border: OutlineInputBorder(),
-                ),
-              ),
+        Flexible(
+          flex: 2,
+          child: TextField(
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegexUtils.numberR)
+            ],
+            controller: _idController,
+            decoration: const InputDecoration(
+              hintText: 'Buscar',
+              border: OutlineInputBorder(),
             ),
-            const SizedBox(width: 10.0),
-            Flexible(
-              flex: 3,
-              child: DropdownButtonFormField<IdType>(
-                value: _selectedIdType,
-                items: idTypes.map((idType) {
-                  return DropdownMenuItem<IdType>(
-                    value: idType['value'] as IdType,
-                    child: Text(idType['label'] as String),
-                  );
-                }).toList(),
-                onChanged: (newValue) {
-                  setState(() {
-                    _selectedIdType = newValue!;
-                  });
-                },
-                decoration: const InputDecoration(
-                  hintText: 'Tipo',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            context.isMobile ?  Container() : const  SizedBox(width: 10.0),
-            Responsive(
-                mobile: Container(),
-                mobileLarge: buttonSearchWidget(),
-                tablet: buttonSearchWidget(),
-                desktop: buttonSearchWidget())
-          ],
+          ),
         ),
-        context.isMobile
-            ? Padding(
-                padding: const EdgeInsets.symmetric(vertical: 15.0),
-                child: buttonSearchWidget(flex: 0, width: double.infinity),
-              )
-            : Container()
+        const SizedBox(width: 10.0),
+        Flexible(
+          flex: 3,
+          child: DropdownButtonFormField<IdType>(
+            value: _selectedIdType,
+            items: idTypes.map((idType) {
+              return DropdownMenuItem<IdType>(
+                value: idType['value'] as IdType,
+                child: Text(idType['label'] as String),
+              );
+            }).toList(),
+            onChanged: (newValue) {
+              setState(() {
+                _selectedIdType = newValue!;
+              });
+            },
+            decoration: const InputDecoration(
+              hintText: 'Tipo',
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ),
+        SizedBox(width: 10.0),
+        buttonSearchWidget()
       ],
     );
   }
